@@ -52,7 +52,6 @@ def update(n):
             pass
         else:
             for s_plot in scat_list:
-                pass
                 # alpha = s_plot.get_alpha()
                 # s_plot.set_alpha(max(alpha-0.01,0))
                 s_plot._sizes -= 1
