@@ -1,4 +1,4 @@
-#http://www.usa.gov/About/developer-resources/1usagov.shtml
+ #http://www.usa.gov/About/developer-resources/1usagov.shtml
   #{
         #"a": USER_AGENT, 
         #"c": COUNTRY_CODE, # 2-character iso code
@@ -23,7 +23,7 @@ from disco.core import result_iterator
 
 class TopLinks(Job):
     partitions = 4
-    input=['tag://bitly:03-01-13']
+    input=["bitly:03:13:13",]
      
     @staticmethod
     def map(line, params):
@@ -75,6 +75,7 @@ if __name__ == '__main__':
     sortedRecords = sorted(unsortedRecords, key = lambda count: count[1], reverse=True)[:10]
     
     #get list of numpyarrays
+    import numpy as np
         
     import matplotlib
     matplotlib.use('Agg')
@@ -85,9 +86,9 @@ if __name__ == '__main__':
     import time, math
 
     #create 3x3 plot of top 9 links with highest clicks
-    plt.subplots_adjust(hspace=0.4, wspace=0.6)
+    # plt.subplots_adjust(hspace=5.4, wspace=5.6)
     for index,events in enumerate(sortedRecords[:-1]):
-        
+        plt.figure()
         filePath = '/tmp/' #FILL IN
         out = open(filePath+'link_'+str(index)+'.out', 'w')
         
@@ -98,7 +99,6 @@ if __name__ == '__main__':
         
         out.close()
         
-        import numpy as np
         timestamps = np.array(events[2])[:,0] #get timestamps
         print events[0], len(timestamps)
         bins, binnedTimes = np.histogram(timestamps, bins=10) 
@@ -108,14 +108,11 @@ if __name__ == '__main__':
         total_time = (timestamps[-1]-timestamps[0])/60.
         
         dates=[datetime.datetime.fromtimestamp(ts,est) for ts in binnedTimes[:-1]] #convert utc time to US/Eastern
-        
-        plt.subplot(3,3,index+1)
-      
+    
         
         plt.xticks(rotation=25,fontsize = 8)
         plt.title(sortedRecords[index][0] + '   t: '+str(len(timestamps)),fontsize = 6)
         plt.plot_date(dates,bins,tz=est,linestyle='dashed')
         
 
-    plt.show()
-    plt.savefig('/tmp/top9_USA-GOV_links.png')
+        plt.savefig(str(index)+'_top_USA-GOV_links.png')
