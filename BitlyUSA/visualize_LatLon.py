@@ -1,8 +1,3 @@
-'''Each frame of the animation represents one minute of tweets. The animation runs at ten frames per second. 
-I represent each tweet as a small white circle at two percent opacity. At the moment a tweet occurs I plot 
-it at ten point size. Every minute that passes I drop the marker size by one point until it disappears.
-'''
-
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime, time, pytz
@@ -33,7 +28,7 @@ lat = []
 lon = []
 
 est=pytz.timezone('US/Eastern')        
-with open('GeoBases_Output/geo_loc.csv', 'rb') as csvfile:
+with open('geo_loc.csv', 'rb') as csvfile:
     geo_loc = csv.reader(csvfile, delimiter=',')
     for row in geo_loc:
         time.append(datetime.datetime.fromtimestamp(int(row[0]),est))
@@ -44,48 +39,8 @@ delta = time[0]-time[-1]
 frame_size = 100
 n_frames = delta.seconds/frame_size
 
-# x,y = m(lon[:200],lat[:200])
-
-# # scatter scaled circles at the city locations
-# scat_plot = m.scatter(
-#     x,
-#     y,
-#     c='white', #color
-#     marker='o', #symbol
-#     s=20,
-#     alpha=0.2, #transparency
-#     zorder = 2, #plotting order
-#     )
-
 plt.title('ClickStream Bitly USA ')
 
-# def decay(n):
-#     for i in range(n):
-#         if i == 0:
-#             x,y = m(lon[:frame_size-1],lat[:frame_size-1])
-#             m.scatter(
-#                 x,
-#                 y,
-#                 c='white', #color
-#                 marker='o', #symbol
-#                 s=max(20-n,0), #decay to 0
-#                 alpha=0.2, #transparency
-#                 zorder = 2, #plotting order
-#                 )
-
-#         else:
-#             start = n*frame_size
-#             stop = start+frame_size-1
-#             x,y = m(lon[start:stop],lat[start:stop])
-#             m.scatter(
-#                 x,
-#                 y,
-#                 c='white', #color
-#                 marker='o', #symbol
-#                 s=max(20-n,0), #decay to 0
-#                 alpha=0.2, #transparency
-#                 zorder = 2, #plotting order
-#                 )
 
 def update(n):
     print n
@@ -123,7 +78,7 @@ def update(n):
 
 print 'num frames: ', n_frames
 anim = animation.FuncAnimation(fig, update, frames=n_frames) #blit=True
-anim.save('movie-1.mp4', fps=10, extra_args=['-vcodec', 'libx264'])
+# anim.save('movie-1.mp4', fps=10, extra_args=['-vcodec', 'libx264'])
 
 # anim.save('movie.mp4')
 
