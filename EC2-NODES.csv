@@ -1,3 +1,5 @@
+chmod 400 key
+
 [master,node001,node002]
 ssh into master
 ssh -i ssh -i pycon2013Key.rsa root@XXXXXXX.compute-1.amazonaws.com
@@ -10,6 +12,7 @@ XXXXXXX.compute-1.amazonaws.com:50030
 hadoop namenode
 XXXXXXX.compute-1.amazonaws.com:50070
 
+Disco
 XXXXXXX.compute-1.amazonaws.com:8989
 
 https:/XXXXXXX.compute-1.amazonaws.com:8888
