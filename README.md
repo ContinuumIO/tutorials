@@ -1,7 +1,7 @@
 tutorials
 =========
 
-A Private repo to develop tutorials
+A public repository to develop tutorials
 
 Topics
 ======
