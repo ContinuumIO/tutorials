@@ -14,7 +14,6 @@ Topics
 *   Image Processing
 *   Text Analysis
 *   Scikit-learn (Ipython Notebook)
-*   
 
 License
 =======
